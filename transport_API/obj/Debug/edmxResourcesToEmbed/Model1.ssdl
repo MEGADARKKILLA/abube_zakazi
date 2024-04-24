@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище ЗаказыModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Заказ">
+    <Key>
+      <PropertyRef Name="id_заказа" />
+    </Key>
+    <Property Name="id_заказа" Type="int" Nullable="false" />
+    <Property Name="Сумма_заказа" Type="money" />
+    <Property Name="Состояние_заказа" Type="varchar" MaxLength="50" />
+    <Property Name="id_клиента" Type="int" />
+    <Property Name="id_товара" Type="int" />
+    <Property Name="id_Транспорта" Type="int" />
+  </EntityType>
+  <EntityType Name="Категория">
+    <Key>
+      <PropertyRef Name="id_Категории" />
+    </Key>
+    <Property Name="id_Категории" Type="int" Nullable="false" />
+    <Property Name="Наименование_категории" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Клиент">
+    <Key>
+      <PropertyRef Name="id_Клиента" />
+    </Key>
+    <Property Name="id_Клиента" Type="int" Nullable="false" />
+    <Property Name="ФИО" Type="varchar" MaxLength="50" />
+    <Property Name="Номер_телефона" Type="int" />
+    <Property Name="Адрес" Type="varchar" MaxLength="50" />
+    <Property Name="Логин" Type="varchar" MaxLength="50" />
+    <Property Name="Пароль" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Скидки">
+    <Key>
+      <PropertyRef Name="id_скидки" />
+    </Key>
+    <Property Name="id_скидки" Type="int" Nullable="false" />
+    <Property Name="Процент_скидки" Type="int" />
+    <Property Name="Длительность" Type="datetime" />
+    <Property Name="id_Товара" Type="int" />
+  </EntityType>
+  <EntityType Name="Товары">
+    <Key>
+      <PropertyRef Name="id_Товара" />
+    </Key>
+    <Property Name="id_Товара" Type="int" Nullable="false" />
+    <Property Name="Цена" Type="money" />
+    <Property Name="Количество" Type="int" />
+    <Property Name="Описание" Type="varchar(max)" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" />
+    <Property Name="id_Категории" Type="int" />
+  </EntityType>
+  <EntityType Name="Транспорт">
+    <Key>
+      <PropertyRef Name="id_Транспорта" />
+    </Key>
+    <Property Name="id_Транспорта" Type="int" Nullable="false" />
+    <Property Name="Тип_транспорта" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Заказ_Клиент">
+    <End Role="Клиент" Type="Self.Клиент" Multiplicity="0..1" />
+    <End Role="Заказ" Type="Self.Заказ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Клиент">
+        <PropertyRef Name="id_Клиента" />
+      </Principal>
+      <Dependent Role="Заказ">
+        <PropertyRef Name="id_клиента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказ_Товары">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="0..1" />
+    <End Role="Заказ" Type="Self.Заказ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="id_Товара" />
+      </Principal>
+      <Dependent Role="Заказ">
+        <PropertyRef Name="id_товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказ_Транспорт">
+    <End Role="Транспорт" Type="Self.Транспорт" Multiplicity="0..1" />
+    <End Role="Заказ" Type="Self.Заказ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Транспорт">
+        <PropertyRef Name="id_Транспорта" />
+      </Principal>
+      <Dependent Role="Заказ">
+        <PropertyRef Name="id_Транспорта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Скидки_Товары">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="0..1" />
+    <End Role="Скидки" Type="Self.Скидки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="id_Товара" />
+      </Principal>
+      <Dependent Role="Скидки">
+        <PropertyRef Name="id_Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Товары_Категория">
+    <End Role="Категория" Type="Self.Категория" Multiplicity="0..1" />
+    <End Role="Товары" Type="Self.Товары" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категория">
+        <PropertyRef Name="id_Категории" />
+      </Principal>
+      <Dependent Role="Товары">
+        <PropertyRef Name="id_Категории" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ЗаказыModelContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Заказ" EntityType="Self.Заказ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Категория" EntityType="Self.Категория" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Клиент" EntityType="Self.Клиент" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Скидки" EntityType="Self.Скидки" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Товары" EntityType="Self.Товары" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Транспорт" EntityType="Self.Транспорт" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Заказ_Клиент" Association="Self.FK_Заказ_Клиент">
+      <End Role="Клиент" EntitySet="Клиент" />
+      <End Role="Заказ" EntitySet="Заказ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказ_Товары" Association="Self.FK_Заказ_Товары">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="Заказ" EntitySet="Заказ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказ_Транспорт" Association="Self.FK_Заказ_Транспорт">
+      <End Role="Транспорт" EntitySet="Транспорт" />
+      <End Role="Заказ" EntitySet="Заказ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Скидки_Товары" Association="Self.FK_Скидки_Товары">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="Скидки" EntitySet="Скидки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Товары_Категория" Association="Self.FK_Товары_Категория">
+      <End Role="Категория" EntitySet="Категория" />
+      <End Role="Товары" EntitySet="Товары" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

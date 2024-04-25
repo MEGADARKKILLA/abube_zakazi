@@ -14,7 +14,7 @@
     <Key>
       <PropertyRef Name="id_заказа" />
     </Key>
-    <Property Name="id_заказа" Type="int" Nullable="false" />
+    <Property Name="id_заказа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Сумма_заказа" Type="money" />
     <Property Name="Состояние_заказа" Type="varchar" MaxLength="50" />
     <Property Name="id_клиента" Type="int" />
@@ -25,16 +25,16 @@
     <Key>
       <PropertyRef Name="id_Категории" />
     </Key>
-    <Property Name="id_Категории" Type="int" Nullable="false" />
+    <Property Name="id_Категории" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Наименование_категории" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Клиент">
     <Key>
       <PropertyRef Name="id_Клиента" />
     </Key>
-    <Property Name="id_Клиента" Type="int" Nullable="false" />
+    <Property Name="id_Клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ФИО" Type="varchar" MaxLength="50" />
-    <Property Name="Номер_телефона" Type="int" />
+    <Property Name="Номер_телефона" Type="varchar" MaxLength="50" />
     <Property Name="Адрес" Type="varchar" MaxLength="50" />
     <Property Name="Логин" Type="varchar" MaxLength="50" />
     <Property Name="Пароль" Type="varchar" MaxLength="50" />
@@ -43,7 +43,7 @@
     <Key>
       <PropertyRef Name="id_скидки" />
     </Key>
-    <Property Name="id_скидки" Type="int" Nullable="false" />
+    <Property Name="id_скидки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Процент_скидки" Type="int" />
     <Property Name="Длительность" Type="datetime" />
     <Property Name="id_Товара" Type="int" />
@@ -52,7 +52,7 @@
     <Key>
       <PropertyRef Name="id_Товара" />
     </Key>
-    <Property Name="id_Товара" Type="int" Nullable="false" />
+    <Property Name="id_Товара" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Цена" Type="money" />
     <Property Name="Количество" Type="int" />
     <Property Name="Описание" Type="varchar(max)" />
@@ -63,7 +63,7 @@
     <Key>
       <PropertyRef Name="id_Транспорта" />
     </Key>
-    <Property Name="id_Транспорта" Type="int" Nullable="false" />
+    <Property Name="id_Транспорта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Тип_транспорта" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Заказ_Клиент">

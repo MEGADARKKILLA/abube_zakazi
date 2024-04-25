@@ -23,12 +23,11 @@ namespace transport_API
     
         public int id_Клиента { get; set; }
         public string ФИО { get; set; }
-        public Nullable<int> Номер_телефона { get; set; }
+        public string Номер_телефона { get; set; }
         public string Адрес { get; set; }
         public string Логин { get; set; }
         public string Пароль { get; set; }
         [JsonIgnore]
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Заказ> Заказ { get; set; }
     }

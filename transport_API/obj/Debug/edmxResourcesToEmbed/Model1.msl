@@ -35,9 +35,9 @@
     <EntitySetMapping Name="Клиент">
       <EntityTypeMapping TypeName="ЗаказыModel.Клиент">
         <MappingFragment StoreEntitySet="Клиент">
+          <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
           <ScalarProperty Name="id_Клиента" ColumnName="id_Клиента" />
           <ScalarProperty Name="ФИО" ColumnName="ФИО" />
-          <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
           <ScalarProperty Name="Адрес" ColumnName="Адрес" />
           <ScalarProperty Name="Логин" ColumnName="Логин" />
           <ScalarProperty Name="Пароль" ColumnName="Пароль" />
